@@ -66,7 +66,7 @@ a:hover {
   font-size: 50px;
 }
 .main-icon {
-  font-size: 70px;
+  max-width: 100px;
   margin-top: 40px;
 }
 .forecast {

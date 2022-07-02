@@ -33,6 +33,7 @@ function showTemperature(response) {
   let minTemp = document.querySelector("#min-main-temp");
   let maxTemp = document.querySelector("#max-main-temp");
   let currentWeather = document.querySelector("#current-weather");
+  let mainIcon = document.querySelector("#icon");
 
   celsiusTemperature = response.data.main.temp;
   currentTemperature.innerHTML = Math.round(celsiusTemperature);
@@ -42,6 +43,11 @@ function showTemperature(response) {
   minTemp.innerHTML = Math.round(response.data.main.temp_min);
   maxTemp.innerHTML = Math.round(response.data.main.temp_max);
   currentWeather.innerHTML = response.data.weather[0].main;
+  mainIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  mainIcon.setAttribute("alt", response.data.weather[0].description);
 }
 function searchCity(city) {
   let apiKey = "2c48af3f43b8d8d0dc03bb103b9b4d3e";
@@ -89,4 +95,4 @@ let celsiusTemperature = null;
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
 
-searchCity("Kyiv");
+searchCity("London");
