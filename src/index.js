@@ -6,7 +6,7 @@ function formatDate() {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
   ];
   let day = days[now.getDay()];
   let hours = now.getHours();
@@ -25,39 +25,22 @@ let now = new Date();
 let wholeDate = document.querySelector("#whole-date");
 wholeDate.innerHTML = formatDate(new Date());
 
-function celGrades(event) {
-  event.preventDefault();
-  let celsius = 23;
-  let celsiusChanging = document.querySelector("#main-grade");
-  celsiusChanging.innerHTML = celsius;
-}
-let celChange = document.querySelector("#celsius-link");
-celChange.addEventListener("click", celGrades);
-
-function farGrades(event) {
-  event.preventDefault();
-  let celsius = 23;
-  let fahrenheit = Math.round((celsius * 9) / 5 + 32);
-  let fahrenheitChanging = document.querySelector("#main-grade");
-  fahrenheitChanging.innerHTML = fahrenheit;
-}
-let farChange = document.querySelector("#fahrenheit-link");
-farChange.addEventListener("click", farGrades);
-
 function showTemperature(response) {
-  let city = document.querySelector("h1");
-  city.innerHTML = response.data.name;
+  let city = document.querySelector("#city");
   let currentTemperature = document.querySelector("#main-grade");
-  currentTemperature.innerHTML = Math.round(response.data.main.temp);
   let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
   let wind = document.querySelector("#wind");
-  wind.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
   let minTemp = document.querySelector("#min-main-temp");
-  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}°`;
   let maxTemp = document.querySelector("#max-main-temp");
-  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}°`;
   let currentWeather = document.querySelector("#current-weather");
+
+  celsiusTemperature = response.data.main.temp;
+  currentTemperature.innerHTML = Math.round(celsiusTemperature);
+  city.innerHTML = response.data.name;
+  humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
+  wind.innerHTML = `Wind: ${response.data.wind.speed} km/h`;
+  minTemp.innerHTML = Math.round(response.data.main.temp_min);
+  maxTemp.innerHTML = Math.round(response.data.main.temp_max);
   currentWeather.innerHTML = response.data.weather[0].main;
 }
 function searchCity(city) {
@@ -84,6 +67,24 @@ function getCurrentPosition(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
+function celGrades(event) {
+  event.preventDefault();
+  let celsiusChanging = document.querySelector("#main-grade");
+  celsiusChanging.innerHTML = Math.round(celsiusTemperature);
+}
+let celChange = document.querySelector("#celsius-link");
+celChange.addEventListener("click", celGrades);
+
+function farGrades(event) {
+  event.preventDefault();
+  let fahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let fahrenheitChanging = document.querySelector("#main-grade");
+  fahrenheitChanging.innerHTML = fahrenheit;
+}
+let farChange = document.querySelector("#fahrenheit-link");
+farChange.addEventListener("click", farGrades);
+
+let celsiusTemperature = null;
 
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
