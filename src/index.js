@@ -40,23 +40,21 @@ function showForecast(response) {
 
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
+    if (index < 6 && index > 0) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col">
+      <div class="col border-hover">
         <div class="weather-day">${formatDay(forecastDay.dt)}</div>
         <img
-          src="http://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png"
+          src="icons/${forecastDay.weather[0].icon}.svg"
           alt=""
-          width="42"
+          width="55"
           class="weather-icon"
         />
         <div class="main-information-section grade">
           <span > ${Math.round(forecastDay.temp.max)}° </span>
-          <span > ${Math.round(forecastDay.temp.min)}° </span>
+          <span class="temp-min"> ${Math.round(forecastDay.temp.min)}° </span>
         </div>
       </div>
   `;
@@ -89,10 +87,7 @@ function showTemperature(response) {
   minTemp.innerHTML = Math.round(response.data.main.temp_min);
   maxTemp.innerHTML = Math.round(response.data.main.temp_max);
   currentWeather.innerHTML = response.data.weather[0].main;
-  mainIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+  mainIcon.setAttribute("src", `icons/${response.data.weather[0].icon}.svg`);
   mainIcon.setAttribute("alt", response.data.weather[0].description);
 
   getForecast(response.data.coord);

@@ -17,7 +17,7 @@ a {
 }
 i:hover,
 a:hover {
-  color: #fdd200;
+  color: #fba502;
 }
 .container {
   font-family: "Fira Sans", sans-serif;
@@ -66,8 +66,9 @@ a:hover {
   font-size: 50px;
 }
 .main-icon {
-  max-width: 100px;
-  margin-top: 40px;
+  width: 150px;
+  margin-right: -40px;
+  margin-top: 20px;
 }
 .forecast {
   margin-top: 20px;
@@ -84,4 +85,11 @@ a:hover {
 .grade {
   text-align: center;
   margin-left: -2px;
+}
+.tem-min {
+  opacity: 0.8;
+}
+.border-hover:hover {
+  background: #c6deff;
+  border-radius: 4px;
 }
