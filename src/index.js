@@ -44,17 +44,19 @@ function showForecast(response) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col border-hover">
+      <div class="col-sm-2">
+      <div class="border-hover">
         <div class="weather-day">${formatDay(forecastDay.dt)}</div>
         <img
           src="icons/${forecastDay.weather[0].icon}.svg"
           alt=""
-          width="55"
+          width="60"
           class="weather-icon"
         />
         <div class="main-information-section grade">
           <span > ${Math.round(forecastDay.temp.max)}° </span>
           <span class="temp-min"> ${Math.round(forecastDay.temp.min)}° </span>
+        </div>
         </div>
       </div>
   `;
